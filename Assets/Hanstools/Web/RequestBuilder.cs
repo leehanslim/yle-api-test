@@ -76,14 +76,14 @@ namespace Hanstools.Web
 			try
 			{
 				Dictionary<string, object> responseTable = JsonFx.Json.JsonReader.Deserialize<Dictionary<string, object>>(request.downloadHandler.text);//raw.ToDictionary() as Dictionary<string, object>;
-				response.SetMappingManually(responseTable);
+				response.SetResponseMap(responseTable);
 				response.SetRawMessage(request.downloadHandler.text);
 				response.SetSuccessFlag(!request.isError && string.IsNullOrEmpty(request.error));
 			}
 			catch
 			{
 				response = new WebResponse();
-				response.SetMappingManually( new Dictionary<string, object>() { {"error", "deserialization failed"} } );
+				response.SetResponseMap( new Dictionary<string, object>() { {"error", "deserialization failed"} } );
 				response.SetRawMessage(request.downloadHandler.text);
 				response.SetSuccessFlag(false);
 			}

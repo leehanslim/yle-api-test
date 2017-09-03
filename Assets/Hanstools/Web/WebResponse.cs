@@ -7,10 +7,8 @@ namespace Hanstools.Web
 	/// <summary>
 	/// Web response object. Easy-to-access information on response received from web.
 	/// </summary>
-	[System.Serializable]
 	public class WebResponse
 	{
-		[SerializeField]
 		private Dictionary<string, object> responseMap;
 
 		public System.Net.HttpStatusCode StatusCode
@@ -41,7 +39,7 @@ namespace Hanstools.Web
 			this.Success = success;
 		}
 
-		public void SetMappingManually(Dictionary<string, object> map)
+		public void SetResponseMap(Dictionary<string, object> map)
 		{
 			this.responseMap = map;
 		}
@@ -51,24 +49,9 @@ namespace Hanstools.Web
 			this.RawMessage = rawMessage;
 		}
 
-		/// <summary>
-		/// Returns object specified by 'key' of type specified by 'T'. If response message is a JSON object, this traverses root level only.
-		/// </summary>
-		/// <param name="key">Key.</param>
-		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public T Get<T>(string key)
+		public Dictionary<string, object> GetResponseMap()
 		{
-			if (responseMap == null || !responseMap.ContainsKey(key)) return default(T);
-
-			try
-			{
-				object returnValue = responseMap[key];
-				return (T)System.Convert.ChangeType(returnValue, typeof(T));
-			}
-			catch
-			{
-				return default(T);
-			}
+			return this.responseMap;
 		}
 	}
 }

@@ -14,7 +14,17 @@ public class Test : MonoBehaviour
 		if (getProgramsList)
 		{
 			getProgramsList = false;
-			YleSDKManager.GetProgramsList(0, 1);
+
+			YleSDKManager.GetProgramsList((list) => {
+			
+				string output = string.Empty;
+				for (int i = 0; i < list.Count; i++)
+				{
+					output += "ID=" + list[i].ID + "\n";
+				}
+				Debug.Log(output);
+
+			}, 0, 1);
 		}
 	}
 }

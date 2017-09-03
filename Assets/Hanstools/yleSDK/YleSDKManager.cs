@@ -24,7 +24,7 @@ namespace Hanstools.Yle
 			Debug.Log("<color=blue>YleSDKManager | Programs Endpoint: \'" + programsEndpoint + "\'</color>");
 		}
 
-		public static void GetProgramsList(int offset, int limit = 10)
+		public static void GetProgramsList(System.Action<IList<ProgramData>> onComplete, int offset, int limit = 10)
 		{
 			string formattedURL = RequestBuilder.AddParametersToURL(programsEndpoint, new Dictionary<string, string>() { 
 				{"offset", offset.ToString()}, 
@@ -35,11 +35,22 @@ namespace Hanstools.Yle
 				Debug.Log("<color=purple>YleSDKManager.GetProgramsList | Success:" + response.Success + ", StatusCode:" + response.StatusCode.ToString() + ", RawMessage:" + response.RawMessage + "</color>");
 				if (!response.Success)
 				{
-					Debug.Log("<color=yellow>YleSDKManager.GetProgramsList | Error:" + response.Get<string>("error") + "</color>");
+					Debug.Log("<color=yellow>YleSDKManager.GetProgramsList | Error:" + response.GetResponseMap().GetValue<string>("error") + "</color>");
 				}
 				else
 				{
-					Debug.Log("<color=purple>YleSDKManager.GetProgramsList | Api:" + response.Get<string>("apiVersion") + "</color>");
+					Debug.Log("<color=purple>YleSDKManager.GetProgramsList | Api:" + response.GetResponseMap().GetValue<string>("apiVersion") + "</color>");
+
+					IList<ProgramData> returnVal = new List<ProgramData>();
+					IDictionary<string, object>[] dataMapCollection = response.GetResponseMap().GetCollection("data");
+					for (int i = 0; i < dataMapCollection.Length; i++)
+					{
+						ProgramData pd = new ProgramData(dataMapCollection[i]);
+						returnVal.Add(pd);
+					}
+
+					if (onComplete != null)
+						onComplete(returnVal);
 				}
 			});
 		}
