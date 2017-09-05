@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInDelay: 2
-  fadeOutDelay: 2
+  fadeOutDelay: 4
   sceneToLoad: main
   simpleFade: {fileID: 510396130}
 --- !u!114 &421480237

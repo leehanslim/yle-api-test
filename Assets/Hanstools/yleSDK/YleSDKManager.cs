@@ -158,7 +158,7 @@ namespace Hanstools.Yle
 				return null;
 
 			CategoryData category = categories.FirstOrDefault(item => item.ID == searchKey || item.Title == searchKey);
-			return category.ID;
+			return category != null ? category.ID : string.Empty;
 		}
 		#endregion // Helpers
 	}
