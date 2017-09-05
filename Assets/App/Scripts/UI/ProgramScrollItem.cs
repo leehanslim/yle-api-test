@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Hanstools.Yle;
 
+/// <summary>
+/// Program scroll item that holds per program-related information
+/// and is responsible for updating the scroll-item visuals.
+/// </summary>
 public class ProgramScrollItem : MonoBehaviour {
 
 	[SerializeField]

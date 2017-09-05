@@ -1,4 +1,6 @@
-﻿
+﻿/// <summary>
+/// Simple enum definitions for program type.
+/// </summary>
 namespace Hanstools.Yle
 {
 	public enum ProgramType

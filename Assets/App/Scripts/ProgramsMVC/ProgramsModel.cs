@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Hanstools.Yle;
 
+/// <summary>
+/// Simple program data model
+/// </summary>
 public class ProgramsModel : MonoBehaviour 
 {
 	public System.Action<IList<ProgramData>> OnDataSetChanged;

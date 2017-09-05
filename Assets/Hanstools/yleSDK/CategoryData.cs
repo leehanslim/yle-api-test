@@ -5,6 +5,10 @@ using Hanstools.Extensions;
 
 namespace Hanstools.Yle
 {
+	/// <summary>
+	/// Data object for holding and serving category-related information. 
+	/// Uses Dictionary extension methods to mine most of the information.
+	/// </summary>
 	public class CategoryData
 	{
 		private IDictionary<string, object> dataMap;

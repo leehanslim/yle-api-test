@@ -7,6 +7,9 @@ using Hanstools.Extensions;
 
 namespace Hanstools.Yle
 {
+	/// <summary>
+	/// YLE SDK manager for serving basic YLE-related services. Acts as a client-side interface for the YLE backend system.
+	/// </summary>
 	public class YleSDKManager : MonoBehaviour 
 	{
 		private const string programsURL = "https://external.api.yle.fi/v1/programs/items.json";
@@ -44,6 +47,10 @@ namespace Hanstools.Yle
 			//Debug.Log("<color=blue>YleSDKManager | Categories Endpoint: \'" + categoriesEndpoint + "\'</color>");
 		}
 
+		/// <summary>
+		/// Initializes the YLE SDK Manager. Call this before anything else.
+		/// </summary>
+		/// <param name="onInitComplete">On init complete.</param>
 		public static void Init(System.Action<bool> onInitComplete = null)
 		{
 			if (Initialized) 
@@ -52,6 +59,15 @@ namespace Hanstools.Yle
 			monoRef.StartCoroutine(monoRef.InitRoutine(onInitComplete));
 		}
 
+		/// <summary>
+		/// Gets the programs list specified by a couple of optional parameters.
+		/// </summary>
+		/// <param name="onComplete">On complete.</param>
+		/// <param name="offset">Offset.</param>
+		/// <param name="limit">Limit.</param>
+		/// <param name="categoryKey">Category key.</param>
+		/// <param name="programType">Program type.</param>
+		/// <param name="mediaObjectType">Media object type.</param>
 		public static void GetProgramsList(System.Action<IList<ProgramData>> onComplete, int offset=0, int limit = 10, string categoryKey=null, ProgramType programType=ProgramType.all, MediaObjectType mediaObjectType=MediaObjectType.all)
 		{
 			if (!Initialized)

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Simple enum definition for media object types
+/// </summary>
 namespace Hanstools.Yle
 {
 	public enum MediaObjectType 

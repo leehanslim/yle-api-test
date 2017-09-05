@@ -4,6 +4,9 @@ using UnityEngine;
 using Hanstools.Yle;
 using UnityEngine.UI;
 
+/// <summary>
+/// Details view controller. Interface between details view and actual program details.
+/// </summary>
 public class DetailsViewController : MonoBehaviour {
 
 	[SerializeField]

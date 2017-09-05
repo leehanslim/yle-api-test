@@ -5,6 +5,9 @@ using System.ComponentModel;
 
 namespace Hanstools.Extensions
 {
+	/// <summary>
+	/// A bunch of dictionary extension methods that help retrieve data deserialized into objects.
+	/// </summary>
 	public static class DictionaryExtensionUtilities
 	{
 		#region Data retrieval methods
