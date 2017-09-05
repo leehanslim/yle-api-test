@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hanstools.Yle;
 
 public class ProgramScrollItem : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	private ProgramData currentData;
+
+	#region Event handlers
+	public void HandleOnPressed()
+	{
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+	#endregion // Event handlers
+
+
+	#region Srcoll item functions
+	public void SetData(ProgramData data)
+	{
+		currentData = data;
+	}
+	#endregion // Scroll item functions
+
+
+	#region Helpers
+	private void UpdateDisplay()
+	{
 		
 	}
+	#endregion // Helpers
 }
