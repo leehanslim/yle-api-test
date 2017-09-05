@@ -69,6 +69,7 @@ public class ProgramsViewController : MonoBehaviour
 		// Set the transform so that this object shows up in the scroll list
 		Transform goTransform = go.transform;
 		goTransform.SetParent(scrollItemsParent);
+		goTransform.localScale = new Vector3(1, 1, 1);
 	}
 
 	public void EnableLoadingAnimation()
