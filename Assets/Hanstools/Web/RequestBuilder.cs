@@ -42,6 +42,7 @@ namespace Hanstools.Web
 		/// <param name="onComplete">On complete.</param>
 		public void NewWebRequest(string url, HttpMethod httpMethod = HttpMethod.GET, WebResponseDelegate onComplete = null)
 		{
+			Debug.Log("<color=yellow>RequestBuilder.NewWebRequest | New web request for URL: \'" + url + "\'</color>");
 			switch (httpMethod)
 			{
 				case HttpMethod.GET:
@@ -72,20 +73,28 @@ namespace Hanstools.Web
 
 			WebResponse response = new WebResponse();
 
-			// Try to deserialize the response text into a simple dictionary 
-			try
+			if (request.isError)
 			{
-				Dictionary<string, object> responseTable = JsonFx.Json.JsonReader.Deserialize<Dictionary<string, object>>(request.downloadHandler.text);//raw.ToDictionary() as Dictionary<string, object>;
-				response.SetResponseMap(responseTable);
-				response.SetRawMessage(request.downloadHandler.text);
-				response.SetSuccessFlag(!request.isError && string.IsNullOrEmpty(request.error));
-			}
-			catch
-			{
-				response = new WebResponse();
-				response.SetResponseMap( new Dictionary<string, object>() { {"error", "deserialization failed"} } );
-				response.SetRawMessage(request.downloadHandler.text);
 				response.SetSuccessFlag(false);
+				response.SetResponseMap( new Dictionary<string, object>() { {"error", request.error} } );
+				response.SetRawMessage(request.downloadHandler.text);
+			}
+			else
+			{
+				// Try to deserialize the response text into a simple dictionary 
+				try
+				{
+					Dictionary<string, object> responseTable = JsonFx.Json.JsonReader.Deserialize<Dictionary<string, object>>(request.downloadHandler.text);
+					response.SetResponseMap(responseTable);
+					response.SetRawMessage(request.downloadHandler.text);
+					response.SetSuccessFlag(true);
+				}
+				catch
+				{
+					response.SetResponseMap( new Dictionary<string, object>() { {"error", "deserialization failed"} } );
+					response.SetRawMessage(request.downloadHandler.text);
+					response.SetSuccessFlag(false);
+				}
 			}
 
 			response.SetStatusCode(ConvertNumToCode(request.responseCode));
@@ -107,6 +116,18 @@ namespace Hanstools.Web
 				{
 					formattedURL += string.Format("&{0}={1}", kvp.Key, kvp.Value);
 				}
+				return formattedURL;
+			}
+		}
+
+		public static string AddParameterToURL(string baseURL, string key, string value)
+		{
+			if (baseURL == null)
+				return null;
+			else
+			{
+				string formattedURL = baseURL;
+				formattedURL += string.Format("&{0}={1}", key, value);
 				return formattedURL;
 			}
 		}

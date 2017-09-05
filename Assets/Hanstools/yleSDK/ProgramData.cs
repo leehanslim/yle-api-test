@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hanstools.Extensions;
 
 namespace Hanstools.Yle
 {
@@ -24,6 +25,35 @@ namespace Hanstools.Yle
 				}
 
 				return id;
+			}
+		}
+
+		private string title;
+		public string Title
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(title))
+				{
+					IDictionary<string, object> map = dataMap.GetHash("title");
+					title = string.IsNullOrEmpty(map.GetValue<string>("fi")) ? map.GetValue<string>("und") : map.GetValue<string>("fi");
+				}
+
+				return title;
+			}
+		}
+
+		private string typeMedia;
+		public string TypeMedia
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(typeMedia))
+				{
+					typeMedia = dataMap.GetValue<string>("typeMedia");
+				}
+
+				return typeMedia;
 			}
 		}
 	}
