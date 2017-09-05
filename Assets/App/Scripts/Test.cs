@@ -5,6 +5,7 @@ using Hanstools.Yle;
 
 public class Test : MonoBehaviour 
 {
+	#if TEST_MODE
 	[SerializeField]
 	private string categoryKey;
 
@@ -16,17 +17,21 @@ public class Test : MonoBehaviour
 
 	[SerializeField]
 	private bool getProgramsList = false;
+	#endif
 
 	void Start()
 	{
+		#if TEST_MODE
 		YleSDKManager.Init( (success) => {
 			Debug.Log("Yle SDK initialized: " + success.ToString());
 		} );
+		#endif
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		#if TEST_MODE
 		if (getProgramsList)
 		{
 			getProgramsList = false;
@@ -48,5 +53,6 @@ public class Test : MonoBehaviour
 					
 			}, 0, 10, categoryKey, type, mediaObjectType);
 		}
+		#endif
 	}
 }
