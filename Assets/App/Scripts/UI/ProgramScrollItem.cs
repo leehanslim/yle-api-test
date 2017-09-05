@@ -10,11 +10,12 @@ public class ProgramScrollItem : MonoBehaviour {
 	private Text titleText;
 
 	private ProgramData currentData;
+	private DetailsViewController detailsViewController;
 
 	#region Event handlers
 	public void HandleOnPressed()
 	{
-		// TODO - pass data to details view controller
+		detailsViewController.SetData(currentData);
 	}
 	#endregion // Event handlers
 
@@ -24,6 +25,11 @@ public class ProgramScrollItem : MonoBehaviour {
 	{
 		currentData = data;
 		UpdateDisplay();
+	}
+
+	public void SetDetailsDisplayReference(DetailsViewController detailsViewController)
+	{
+		this.detailsViewController = detailsViewController;	
 	}
 	#endregion // Scroll item functions
 

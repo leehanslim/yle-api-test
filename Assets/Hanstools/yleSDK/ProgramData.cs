@@ -56,5 +56,52 @@ namespace Hanstools.Yle
 				return typeMedia;
 			}
 		}
+
+		private string duration;
+		public string Duration
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(duration))
+				{
+					duration = dataMap.GetValue<string>("duration");
+				}
+				return duration;
+			}
+		}
+
+		private string typeCreative;
+		public string TypeCreative
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(typeCreative))
+				{
+					typeCreative = dataMap.GetValue<string>("typeCreative");
+				}
+				return typeCreative;
+			}
+		}
+
+		public string description;
+		public string Description
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(description))
+				{
+					IDictionary<string, object> descriptionHash = dataMap.GetHash("description");
+					if (descriptionHash.ContainsKey("fi"))
+					{
+						description = descriptionHash.GetValue<string>("fi");
+					}
+					else
+					{
+						description = "Could not retrieve description.";
+					}
+				}
+				return description;
+			}
+		}
 	}
 }

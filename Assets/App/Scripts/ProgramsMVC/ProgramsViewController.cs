@@ -9,6 +9,9 @@ public class ProgramsViewController : MonoBehaviour
 	private ProgramsModel model;
 
 	[SerializeField]
+	private DetailsViewController detailsViewController;
+
+	[SerializeField]
 	private Transform scrollItemsParent;
 
 	[SerializeField]
@@ -44,7 +47,7 @@ public class ProgramsViewController : MonoBehaviour
 		
 	public void HandleOnScrollVectorChanged(Vector2 vector)
 	{
-		if (vector.y < 0.1)
+		if (vector.y < 0.05f)
 		{
 			// Broadcast to whoever's listening that we're nearing the end of the list
 			if (OnScrollNearEnd != null)
@@ -61,6 +64,7 @@ public class ProgramsViewController : MonoBehaviour
 		GameObject go = Instantiate(scrollItemPrefab);
 		ProgramScrollItem programScrollItem = go.GetComponent<ProgramScrollItem>();
 		programScrollItem.SetData(programData);
+		programScrollItem.SetDetailsDisplayReference(detailsViewController);
 
 		// Set the transform so that this object shows up in the scroll list
 		Transform goTransform = go.transform;
